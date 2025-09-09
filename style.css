@@ -15,8 +15,8 @@
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-/* Light Theme */
-.light-theme {
+/* Light Theme overrides */
+body.light-theme {
   --bg:#f9fafb;
   --card:#ffffff;
   --muted:#4b5563;
@@ -26,6 +26,7 @@
   --text:#111827;
   --heading:#111827;
 }
+
 
 /* Global */
 *{box-sizing:border-box}
