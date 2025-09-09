@@ -10,4 +10,27 @@ document.addEventListener('DOMContentLoaded', function(){
       if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById("theme-toggle");
+  const body = document.body;
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "light") {
+    body.classList.add("light-theme");
+    toggleBtn.textContent = "🌙";
+  } else {
+    toggleBtn.textContent = "☀️";
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    body.classList.toggle("light-theme");
+    if (body.classList.contains("light-theme")) {
+      toggleBtn.textContent = "🌙";
+      localStorage.setItem("theme", "light");
+    } else {
+      toggleBtn.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
+    }
+  });
 });
