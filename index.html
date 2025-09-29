@@ -130,15 +130,54 @@ I bring together brand design, digital platforms, AI & data solutions, and event
             <li>On-time delivery and quality guarantees</li>
           </ul>
         </div>
-        <aside class="testimonials">
-          <h3>What clients say</h3>
-          <blockquote>“Laurence delivered above expectations — reliable, neat, and strategic.” — Client</blockquote>
-          <blockquote>“The website was not only beautiful but also fast and easy for us to update. Our customers noticed the difference immediately.” — Business Owner</blockquote>
-          <blockquote>“Laurence took the time to understand our brand. The result felt premium and positioned us far better in our industry.” — Marketing Lead</blockquote>
-          <blockquote>“From concept to execution, the process was smooth. Communication was clear, deadlines were met, and the outcome exceeded expectations.” — Startup Founder</blockquote>
-          <blockquote>“Reliable, resourceful, and strategic. Laurence doesn’t just build — he advises and ensures your investment performs.” — SME Director</blockquote>
-          <blockquote>“We’ve worked with agencies before, but this felt personal and professional. He actually cared about the business outcome.” — Creative Partner</blockquote>
-        </aside>
+<section class="testimonials">
+  <h2>What Clients Say</h2>
+  <div class="testimonial-container">
+    <div class="testimonial-track">
+      <blockquote>“The website was not only beautiful but also fast and easy for us to update. Our customers noticed the difference immediately.” — Business Owner</blockquote>
+      <blockquote>“Laurence took the time to understand our brand. The result felt premium and positioned us far better in our industry.” — Marketing Lead</blockquote>
+      <blockquote>“From concept to execution, the process was smooth. Communication was clear, deadlines were met, and the outcome exceeded expectations.” — Startup Founder</blockquote>
+      <blockquote>“Reliable, resourceful, and strategic. Laurence doesn’t just build — he advises and ensures your investment performs.” — SME Director</blockquote>
+      <blockquote>“We’ve worked with agencies before, but this felt personal and professional. He actually cared about the business outcome.” — Creative Partner</blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+.testimonials {
+  text-align: center;
+  padding: 2rem;
+  background: #fafafa;
+}
+.testimonial-container {
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+.testimonial-track {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+  scrollbar-width: none; /* hide scrollbar in Firefox */
+}
+.testimonial-track::-webkit-scrollbar {
+  display: none; /* hide scrollbar in Chrome/Safari */
+}
+.testimonial-track blockquote {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  font-size: 1.1rem;
+  font-style: italic;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+</style>
+
       </div>
     </section>
 
