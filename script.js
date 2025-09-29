@@ -33,4 +33,22 @@ document.addEventListener('DOMContentLoaded', function(){
       localStorage.setItem("theme", "dark");
     }
   });
+
+  // === Testimonial auto-slide ===
+const track = document.querySelector('.testimonial-track');
+if (track) {
+  const quotes = document.querySelectorAll('.testimonial-track blockquote');
+  let index = 0;
+
+  function showNext() {
+    index = (index + 1) % quotes.length;
+    track.scrollTo({
+      left: quotes[index].offsetLeft,
+      behavior: 'smooth'
+    });
+  }
+
+  setInterval(showNext, 5000); // change every 5 seconds
+}
+
 });
