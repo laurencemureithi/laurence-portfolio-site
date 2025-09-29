@@ -95,7 +95,9 @@ h2{font-size:1.4rem;margin-bottom:18px;color:var(--heading)}
 
 .contact-grid{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
 .contact-form label{display:block;margin-bottom:10px;color:var(--muted)}
-.contact-form input,.contact-form textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.contact-form input,.contact-form textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--muted);background:var(--card);color:var(--text);font-size:1rem;transition:border-color .2s,box-shadow .2s,background .2s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(110,231,183,.2);outline:none}
+.contact-form input:hover,.contact-form textarea:hover{border-color:var(--primary)}
 .form-actions{display:flex;gap:12px;margin-top:8px;align-items:center}
 .muted{color:var(--muted)}
 
