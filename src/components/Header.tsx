@@ -43,19 +43,40 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={`sticky top-0 z-50 transition-all duration-200 border-b ${
         scrolled
-          ? 'bg-[#060b14]/92 dark:bg-[#060b14]/92 light-theme:bg-white/95 backdrop-blur-md border-white/10 dark:border-white/10 light-theme:border-slate-200 shadow-md shadow-black/20'
-          : 'bg-[#060b14]/75 dark:bg-[#060b14]/75 light-theme:bg-white/80 backdrop-blur-sm border-white/5 dark:border-white/5 light-theme:border-slate-200/50'
+          ? 'bg-[#060b14]/95 dark:bg-[#060b14]/95 light-theme:bg-white/95 backdrop-blur-md border-white/10 dark:border-white/10 light-theme:border-slate-200 shadow-md shadow-black/20'
+          : 'bg-[#060b14]/85 dark:bg-[#060b14]/85 light-theme:bg-white/90 backdrop-blur-sm border-white/5 dark:border-white/5 light-theme:border-slate-200/60'
       }`}
     >
-      <div className="max-w-[1280px] mx-auto px-6 h-18 flex items-center justify-between gap-6">
+      {/* Top Announcement Bar */}
+      <div className="bg-[#040810] dark:bg-[#040810] light-theme:bg-slate-100 border-b border-white/10 dark:border-white/10 light-theme:border-slate-200 py-1.5 px-4 text-center">
+        <div className="max-w-[1280px] mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-2 text-[11px] sm:text-xs">
+          <div className="flex items-center gap-2 text-slate-300 dark:text-slate-300 light-theme:text-slate-700">
+            <span className="inline-block w-2 h-2 rounded-full bg-[#a3e635] shadow-[0_0_8px_rgba(163,230,53,0.8)] animate-pulse" />
+            <span className="font-medium">
+              Manufacturing Operations · Data Automation · Digital Experiences · Based in Kenya, Serving Globally
+            </span>
+          </div>
+          <div className="hidden md:flex items-center gap-3 text-slate-400 dark:text-slate-400 light-theme:text-slate-600 font-mono text-[11px]">
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="hover:text-[#a3e635] text-[#a3e635] transition-colors font-semibold"
+            >
+              Open for Consultations &amp; Projects →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-[1280px] mx-auto px-6 h-16 sm:h-18 flex items-center justify-between gap-6">
         {/* Brand Wordmark */}
         <a
           href="#"
           onClick={(e) => handleNavClick(e, 'body')}
-          className="text-lg font-bold tracking-tight text-white dark:text-white light-theme:text-slate-950 whitespace-nowrap shrink-0 flex items-center gap-2.5 group"
+          className="text-base sm:text-lg font-bold tracking-tight text-white dark:text-white light-theme:text-slate-950 whitespace-nowrap shrink-0 flex items-center gap-2.5 group"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#a3e635] shadow-[0_0_10px_rgba(163,230,53,0.5)] group-hover:scale-125 transition-transform" />
-          <span className="font-display">{PERSONAL_INFO.fullName}</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#a3e635] shadow-[0_0_10px_rgba(163,230,53,0.6)] group-hover:scale-125 transition-transform" />
+          <span className="font-display font-extrabold">{PERSONAL_INFO.fullName}</span>
         </a>
 
         {/* Navigation Links */}

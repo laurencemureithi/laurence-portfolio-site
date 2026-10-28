@@ -4,7 +4,7 @@ import { PRICING_PACKAGES, PricingPackageItem } from '../data/portfolio';
 import { ScopeCalculator } from './ScopeCalculator';
 
 interface PricingProps {
-  onSelectPackage: (packageName: string, price: string) => void;
+  onSelectPackage: (packageName: string, price: string, customBrief?: string) => void;
   onRequestCustomQuote: () => void;
 }
 
@@ -162,12 +162,13 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectPackage, onRequestCust
 
         {/* Interactive Scope & Budget Estimator */}
         <ScopeCalculator
-          onBookScope={(selectedNames, totalRange) => {
+          onBookScope={(selectedNames, totalRange, scopeBriefText) => {
             onSelectPackage(
               `Custom Package (${selectedNames.length} items): ${selectedNames.slice(0, 2).join(', ')}${
                 selectedNames.length > 2 ? '...' : ''
               }`,
-              totalRange
+              totalRange,
+              scopeBriefText
             );
           }}
         />

@@ -5,24 +5,31 @@ import { PERSONAL_INFO } from '../data/portfolio';
 interface ContactProps {
   initialService?: string;
   initialBudget?: string;
+  initialDescription?: string;
 }
 
-export const Contact: React.FC<ContactProps> = ({ initialService, initialBudget }) => {
+export const Contact: React.FC<ContactProps> = ({
+  initialService,
+  initialBudget,
+  initialDescription,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     enquiryType: initialService || 'Websites & Digital Experiences',
     budgetRange: initialBudget || 'KES 25,000 – 65,000',
-    description: '',
+    description: initialDescription || '',
   });
 
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedBrief, setCopiedBrief] = useState(false);
   const [mailDraftOpened, setMailDraftOpened] = useState(false);
 
   useEffect(() => {
     if (initialService) setFormData((prev) => ({ ...prev, enquiryType: initialService }));
     if (initialBudget) setFormData((prev) => ({ ...prev, budgetRange: initialBudget }));
-  }, [initialService, initialBudget]);
+    if (initialDescription) setFormData((prev) => ({ ...prev, description: initialDescription }));
+  }, [initialService, initialBudget, initialDescription]);
 
   const handleCopyEmail = async () => {
     try {
@@ -34,11 +41,30 @@ export const Contact: React.FC<ContactProps> = ({ initialService, initialBudget 
     }
   };
 
+  const handleCopyBrief = async () => {
+    const briefText =
+      `PROJECT ENQUIRY FOR LAURENCE MAGONDU\n` +
+      `====================================\n` +
+      `Client Name: ${formData.name || 'Potential Client'}\n` +
+      `Email: ${formData.email || 'Not specified'}\n` +
+      `Enquiry Type: ${formData.enquiryType}\n` +
+      `Budget Range: ${formData.budgetRange}\n\n` +
+      `Project Description & Requirements:\n${formData.description || 'Custom Scope Evaluation'}`;
+
+    try {
+      await navigator.clipboard.writeText(briefText);
+      setCopiedBrief(true);
+      setTimeout(() => setCopiedBrief(false), 2500);
+    } catch {
+      // Fallback
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const subject = encodeURIComponent(
-      `Project Enquiry: ${formData.enquiryType} — ${formData.name}`
+      `Project Enquiry: ${formData.enquiryType} — ${formData.name || 'New Client'}`
     );
     const body = encodeURIComponent(
       `PROJECT ENQUIRY FOR LAURENCE MAGONDU\n\n` +
@@ -55,11 +81,14 @@ export const Contact: React.FC<ContactProps> = ({ initialService, initialBudget 
   };
 
   const getWhatsAppMessageUrl = () => {
+    const summary = formData.description
+      ? `\n\nScope Summary:\n${formData.description.slice(0, 300)}...`
+      : '';
     const text = encodeURIComponent(
       `Hi Laurence, I would like to discuss a project.\n\n` +
       `Name: ${formData.name || 'Client'}\n` +
       `Enquiry Type: ${formData.enquiryType}\n` +
-      `Budget: ${formData.budgetRange}`
+      `Budget: ${formData.budgetRange}${summary}`
     );
     return `https://wa.me/254110343757?text=${text}`;
   };
@@ -176,7 +205,7 @@ export const Contact: React.FC<ContactProps> = ({ initialService, initialBudget 
                 />
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="pt-2 flex flex-wrap items-center gap-3.5">
                 <button
                   type="submit"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-950 bg-[#a3e635] hover:bg-[#bef264] active:scale-98 transition-all cursor-pointer shadow-lg shadow-lime-500/20"
@@ -194,6 +223,24 @@ export const Contact: React.FC<ContactProps> = ({ initialService, initialBudget 
                   <MessageSquare className="w-4 h-4" />
                   <span>Send via WhatsApp</span>
                 </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyBrief}
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl text-xs font-semibold text-slate-300 dark:text-slate-300 light-theme:text-slate-700 bg-white/5 dark:bg-white/5 light-theme:bg-slate-100 hover:bg-white/10 dark:hover:bg-white/10 light-theme:hover:bg-slate-200 border border-white/10 dark:border-white/10 light-theme:border-slate-300 transition-colors cursor-pointer"
+                >
+                  {copiedBrief ? (
+                    <>
+                      <Check className="w-4 h-4 text-[#a3e635]" />
+                      <span className="text-[#a3e635] font-bold">Brief Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      <span>Copy Structured Brief</span>
+                    </>
+                  )}
+                </button>
               </div>
             </form>
 

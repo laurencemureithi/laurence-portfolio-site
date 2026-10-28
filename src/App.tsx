@@ -21,6 +21,7 @@ export function App() {
   const [activeSection, setActiveSection] = useState<string>('');
   const [selectedServiceForContact, setSelectedServiceForContact] = useState<string>('');
   const [selectedBudgetForContact, setSelectedBudgetForContact] = useState<string>('');
+  const [selectedDescriptionForContact, setSelectedDescriptionForContact] = useState<string>('');
 
   // Apply theme attributes and classes to html and body
   useEffect(() => {
@@ -69,9 +70,10 @@ export function App() {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  const scrollToContact = (service?: string, budget?: string) => {
+  const scrollToContact = (service?: string, budget?: string, description?: string) => {
     if (service) setSelectedServiceForContact(service);
     if (budget) setSelectedBudgetForContact(budget);
+    if (description) setSelectedDescriptionForContact(description);
     const el = document.getElementById('contact');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -112,13 +114,25 @@ export function App() {
 
         <OperationsCaseStudies
           onDiscussOperations={(savings) =>
-            scrollToContact('Operations & Reporting Audit', `Est. Annual Impact: ${savings}`)
+            scrollToContact(
+              'Operations & Reporting Audit',
+              `Est. Annual Impact: ${savings}`,
+              `Hello Laurence,\n\nI evaluated my operational cost leakages using your website's Interactive ROI Simulator and would like to discuss an operations and reporting audit.\nProjected annual value recoverable: ${savings}.\n\nPlease let me know when we can arrange an introductory consultation.`
+            )
           }
         />
 
         <Pricing
-          onSelectPackage={(pkgName, price) => scrollToContact(pkgName, price)}
-          onRequestCustomQuote={() => scrollToContact('Custom Multi-Disciplinary Scope')}
+          onSelectPackage={(pkgName, price, customBrief) =>
+            scrollToContact(pkgName, price, customBrief)
+          }
+          onRequestCustomQuote={() =>
+            scrollToContact(
+              'Custom Multi-Disciplinary Scope',
+              'To Be Discussed',
+              'Hello Laurence,\n\nI have a multi-disciplinary project requirement combining operational workflows, software/web tools, and branding. Let’s discuss how we can structure an itemized proposal.'
+            )
+          }
         />
 
         <Process />
@@ -130,6 +144,7 @@ export function App() {
         <Contact
           initialService={selectedServiceForContact}
           initialBudget={selectedBudgetForContact}
+          initialDescription={selectedDescriptionForContact}
         />
       </main>
 
