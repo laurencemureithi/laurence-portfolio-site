@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   name: string;
   category: string;
-  projectType: 'Commercial Client Work' | 'Personal Venture' | 'Brand Concept' | 'Operational Prototype';
+  projectType: 'Commercial Client Work' | 'Personal Venture' | 'Brand Concept' | 'Operational Case Study';
   businessContext: string;
   myContribution: string;
   approachAndTools: string;
@@ -20,33 +20,36 @@ export interface ServiceItem {
   title: string;
   problemSolved: string;
   whatYouReceive: string[];
+  startingPriceKes?: string;
   suitableFor: string;
 }
 
 export interface ServiceCategory {
   id: string;
+  number: string;
   categoryName: string;
   tagline: string;
   description: string;
   services: ServiceItem[];
 }
 
-export interface PricingItem {
+export interface PricingPackageItem {
   id: string;
-  name: string;
-  priceKes: string;
-  priceUsdApprox: string;
-  billingType: 'project' | 'monthly' | 'starting';
+  service: string;
+  indicativePriceKes: string;
   typicalScope: string;
-  deliverables: string[];
-  turnaround: string;
+  whatIsIncluded: string[];
+  category: 'Design' | 'Web' | 'Data & Operations';
 }
 
-export interface PricingCategory {
-  id?: string;
-  categoryName: string;
-  categoryDescription: string;
-  items: PricingItem[];
+export interface OperationsCaseStudy {
+  id: string;
+  theme: string;
+  title: string;
+  problem: string;
+  methodology: string[];
+  deliverableAndValue: string;
+  toolsUsed: string[];
 }
 
 export interface WorkStep {
@@ -54,7 +57,7 @@ export interface WorkStep {
   title: string;
   summary: string;
   description: string;
-  keyDeliverable: string;
+  deliverable: string;
 }
 
 export interface FAQItem {
@@ -64,11 +67,9 @@ export interface FAQItem {
 
 export const PERSONAL_INFO = {
   fullName: 'Laurence Magondu',
-  headline: 'Business Systems, Automation and Digital Experiences',
-  supportingStatement:
-    'I help businesses improve operations, make better use of their data, and build stronger digital experiences through practical technology, process improvement, and thoughtful design.',
-  secondaryStatement:
-    'Combining operational thinking, technology, data, and design to deliver practical business solutions.',
+  headline: 'I turn business problems into better systems, smarter operations, and digital experiences that work.',
+  subheadline:
+    'A practical multidisciplinary professional combining manufacturing operations, continuous improvement, data analytics, automation, and creative digital execution.',
   email: 'laurencemureithi1999@gmail.com',
   whatsappNumber: '+254 110 343757',
   whatsappDisplay: '+254 110 343757',
@@ -76,210 +77,391 @@ export const PERSONAL_INFO = {
     'https://wa.me/254110343757?text=Hi%20Laurence,%20I%20would%20like%20to%20discuss%20a%20project%20for%20my%20business.',
   linkedinUrl: 'https://www.linkedin.com/in/laurence-magondu-a96ab2295/',
   instagramUrl: 'https://www.instagram.com/laurencemagondu/',
-  location: 'Nairobi, Kenya · Available for Local & International Clients',
+  location: 'Nairobi, Kenya · Local & International Engagements',
   portraitImage: '/images/mur.jpg',
+  credentials: [
+    'Diploma in IT',
+    'CQP Foundation-Level Training (Pursuing Intermediate)',
+    'Manufacturing Operations Experience Across Quality, Production, Engineering & IT',
+    'Kaizen & Lean Implementation with Japanese Consultants',
+  ],
 };
 
 export const SERVICES_DATA: ServiceCategory[] = [
   {
-    id: 'business-systems',
-    categoryName: 'Category A: Business Systems & Operational Improvement',
-    tagline: 'Streamlining manufacturing, operational workflows, and data decision-making.',
+    id: 'brand-design',
+    number: '01',
+    categoryName: 'Brand & Graphic Design',
+    tagline: 'Distinctive, credible visual communication that commands trust.',
     description:
-      'Rooted in manufacturing operations since 2021 across quality, production, maintenance workflows, and IT support. I build practical tools that eliminate manual busywork and bring visibility to daily operations.',
+      'Helping businesses and entrepreneurs present themselves with authority and visual consistency across all customer touchpoints.',
     services: [
       {
-        id: 'excel-reporting-automation',
-        title: 'Excel Reporting & Workflow Automation',
+        id: 'logo-design',
+        title: 'Logo Design',
         problemSolved:
-          'Teams waste hours each week copying and pasting data across spreadsheets, leading to formula errors, broken sheets, and delayed reports.',
+          'Inconsistent, amateur, or low-resolution logos that make a business look less credible when pitching clients or investors.',
         whatYouReceive: [
-          'Standardized automated Excel workbooks with macro/VBA or Python scripts',
-          'Single-click data aggregation and formatted executive summaries',
-          'Error-checking validation rules and formula lock protection',
-          'Clear user guidelines so your staff can run it independently',
+          'Multiple distinct concept directions based on your business market positioning',
+          'Primary mark, horizontal lockup, submark, and monochrome variations',
+          'Vector master files (AI, SVG, PDF) and optimized raster files (PNG, JPG)',
+          'Clear minimum size and margin specifications',
         ],
-        suitableFor: 'Operations managers, inventory supervisors, accountants, and SMEs tracking daily throughput.',
+        startingPriceKes: 'KES 5,000 – 12,000',
+        suitableFor: 'New ventures, corporate startups, and established firms modernizing their visual identity.',
       },
       {
-        id: 'operational-dashboards',
-        title: 'Operational Dashboards & KPI Reporting',
+        id: 'starter-brand-identity',
+        title: 'Starter Brand Identity',
         problemSolved:
-          'Management cannot quickly see key operational metrics like production output, scrap rates, machine downtime, or stock levels without waiting for manual compilation.',
+          'Staff and marketing partners use conflicting fonts, colors, and layouts because no single visual standard exists.',
         whatYouReceive: [
-          'Clean, visual dashboards with automated refresh capability',
-          'Target vs. actual tracking with automated variance highlights',
-          'Trend charts showing week-over-week and month-over-month performance',
-          'Modular layout tailored to shop-floor or executive decision reviews',
+          'Full logo suite with complete color hierarchy (HEX, RGB, CMYK values)',
+          'Typography pairing rules and headline/body font hierarchy guide',
+          'Core brand guideline sheet for printers, developers, and team members',
+          'Business card, letterhead, and digital social media asset templates',
         ],
-        suitableFor: 'Plant heads, manufacturing supervisors, logistics hubs, and business owners.',
+        startingPriceKes: 'KES 15,000 – 35,000',
+        suitableFor: 'Growing SMEs, consulting practices, and businesses preparing for formal launch.',
       },
       {
-        id: 'data-cleaning-reconciliation',
-        title: 'Data Cleaning, Reconciliation & Analysis',
+        id: 'marketing-print-collateral',
+        title: 'Posters, Flyers & Marketing Materials',
         problemSolved:
-          'Discrepancies between physical inventory, invoices, and sales sheets create confusion and audit issues.',
+          'Poorly composed marketing materials that print with blurry text, distorted colors, or cropped edges.',
         whatYouReceive: [
-          'Automated reconciliation routines identifying mismatches and missing entries',
-          'Cleaned and consolidated datasets ready for reporting or software migration',
-          'Root-cause summary report detailing where discrepancies originated',
-          'Standardized data input templates to prevent future dirty data',
+          'High-impact promotional layouts for physical print and WhatsApp/social sharing',
+          'Press-ready CMYK PDFs prepared with proper bleeds, trims, and crop marks',
+          'Direct liaison with local commercial printers to verify proof prints',
         ],
-        suitableFor: 'Businesses preparing for financial year-end, stock audits, or system transitions.',
+        startingPriceKes: 'KES 2,000 – 5,000',
+        suitableFor: 'Retail shops, product launches, event organizers, and sales teams.',
       },
       {
-        id: 'process-mapping-sops',
-        title: 'Process Mapping & SOP Documentation',
+        id: 'brand-guidelines',
+        title: 'Basic Brand Guidelines',
         problemSolved:
-          'Critical business procedures exist only in staff members’ heads. When employees leave or fall sick, work stalls and errors multiply.',
+          'Brand dilution caused by inconsistent external vendor work and improper asset usage.',
         whatYouReceive: [
-          'Visual swimlane process flowcharts mapping inputs, decisions, and handoffs',
-          'Detailed, easy-to-read Standard Operating Procedures (SOPs) with step-by-step instructions',
-          'Quality control checklists and verification forms',
-          'Digital templates accessible to new hires and training leads',
+          'Reference document outlining logo clearance zones, color codes, and acceptable uses',
+          'Typography rules and imagery styling recommendations',
+          'Digital PDF format easy to distribute to internal staff and external agencies',
         ],
-        suitableFor: 'Growing companies, manufacturing lines, service departments, and teams standardizing for quality.',
-      },
-      {
-        id: 'lean-continuous-improvement',
-        title: 'Lean & Continuous Improvement Support',
-        problemSolved:
-          'Recurrent quality defects, hidden bottlenecks, and wasted materials eat into profit margins without a structured framework to solve them.',
-        whatYouReceive: [
-          'Root cause analysis (5-Whys, Fishbone diagrams) for chronic operational defects',
-          'Kaizen action plans targeting quick-win waste reduction',
-          '5S workplace organization guidance for tools, parts, and workspaces',
-          'Practical shift hand-over protocols and daily gemba tracking',
-        ],
-        suitableFor: 'Production lines, fabrication workshops, packaging facilities, and maintenance teams.',
-      },
-      {
-        id: 'maintenance-asset-tracking',
-        title: 'Maintenance & Asset Tracking Solutions',
-        problemSolved:
-          'Unscheduled machinery breakdowns occur because preventive maintenance servicing dates and spare parts inventories are tracked informally or forgotten.',
-        whatYouReceive: [
-          'Digital preventive maintenance scheduling calendar and reminder logs',
-          'Asset register tracking machine specifications, serial numbers, and service history',
-          'Spare parts min-max stock level tracker with reorder alerts',
-          'Downtime log capturing root causes (electrical, mechanical, operator, material)',
-        ],
-        suitableFor: 'Maintenance technicians, workshop heads, factory engineers, and facility managers.',
-      },
-      {
-        id: 'web-business-systems',
-        title: 'Web-Based Business Systems & Operational Prototypes',
-        problemSolved:
-          'Commercial off-the-shelf software is bloated and costly, but multi-user spreadsheets get corrupted easily.',
-        whatYouReceive: [
-          'Custom lightweight web portal for shift logging, asset lookups, or internal data entry',
-          'Multi-user form inputs connected to a central structured database or Google Sheets',
-          'Role-based views allowing supervisors to review while staff input entries',
-          'Full source code ownership with zero recurring vendor lock-in',
-        ],
-        suitableFor: 'SMEs ready to move beyond fragile spreadsheets without paying enterprise subscription costs.',
-      },
-      {
-        id: 'automation-ai-workflows',
-        title: 'Practical Automation & AI-Assisted Workflows',
-        problemSolved:
-          'Manual document reading, copy-paste between portals, and answering routine repetitive inquiries slow down customer and internal operations.',
-        whatYouReceive: [
-          'Automated data pipelines connecting forms, email alerts, and spreadsheets',
-          'Practical AI-assisted document parsing or content summarization workflows',
-          'Standardized prompts and verified output validation scripts',
-          'Documentation explaining limits, operating costs, and manual fallback',
-        ],
-        suitableFor: 'Teams looking for grounded, cost-effective automation without speculative jargon.',
+        startingPriceKes: 'Scoped with identity package',
+        suitableFor: 'Organizations standardizing their communications across teams.',
       },
     ],
   },
   {
-    id: 'digital-creative',
-    categoryName: 'Category B: Digital Presence & Creative Design',
-    tagline: 'Professional visual branding and clear, responsive web platforms designed for purpose.',
+    id: 'web-digital',
+    number: '02',
+    categoryName: 'Websites & Digital Experiences',
+    tagline: 'Fast, responsive web solutions designed around real business purpose.',
     description:
-      'Through Bluprint and bespoke web development, I create professional brand assets and modern digital platforms that establish credibility and help businesses look premium.',
+      'Custom websites and digital experiences built to explain your offerings clearly, earn customer trust, and drive actionable inquiries.',
     services: [
       {
-        id: 'logo-brand-identity',
-        title: 'Logo Design & Brand Identity',
-        problemSolved:
-          'A mismatched or amateur visual identity undermines business credibility when pitching corporate clients, partners, or investors.',
-        whatYouReceive: [
-          'Primary logo, secondary marks, and monochrome variations in all vector formats (SVG, PDF, PNG)',
-          'Curated brand color palette (HEX, RGB, CMYK) and typographic system',
-          'Brand guidelines sheet specifying correct usage, margins, and misuses',
-          'Social media profile avatars and favicon assets',
-        ],
-        suitableFor: 'New ventures launching, and established companies refreshing their market appearance.',
-      },
-      {
-        id: 'marketing-print-design',
-        title: 'Marketing Materials & Print Design',
-        problemSolved:
-          'Low-quality flyers, unaligned banners, and poorly formatted print files waste printing budgets and damage brand perception.',
-        whatYouReceive: [
-          'Press-ready brochures, flyers, banners, and presentation folders',
-          'Accurate CMYK color separation, bleed margins, and crop marks for error-free printing',
-          'Digital versions optimized for WhatsApp sharing and email distribution',
-          'Direct liaison with local commercial printers to verify proof prints',
-        ],
-        suitableFor: 'Retail businesses, event spaces, corporate conferences, and manufacturing catalogs.',
-      },
-      {
         id: 'business-websites',
-        title: 'Business & Portfolio Websites',
+        title: 'Business Websites (4–6 Pages)',
         problemSolved:
-          'Potential customers searching online find either no website or a slow, outdated page that does not explain what the business actually does.',
+          'A business has either no web presence or an outdated, slow site that does not convey its actual capability or generate leads.',
         whatYouReceive: [
-          'Custom, responsive website built with clean code (React/TypeScript or semantic HTML)',
-          'Clear, conversion-focused structure designed around your key service offerings',
-          'Mobile optimization, fast load speeds, and integrated WhatsApp / email contact triggers',
-          'Clear hosting setup documentation and full source code handover',
+          '4 to 6 structured pages (Home, About, Services/Capabilities, Case Studies, FAQ, Contact)',
+          'Fully responsive design optimized for mobile, tablet, and desktop screens',
+          'Direct WhatsApp chat integration and structured inquiry email routing',
+          'Clean semantic code, search-engine metadata, and source file ownership',
         ],
-        suitableFor: 'Consultants, engineering firms, service companies, and professionals.',
-      },
-      {
-        id: 'ecommerce-websites',
-        title: 'E-Commerce Websites',
-        problemSolved:
-          'Selling products through social media DMs alone is disorganized, drops orders, and limits growth to manual messaging.',
-        whatYouReceive: [
-          'Organized product catalog with search, category filtering, and product variations',
-          'Mobile-first checkout flow with local payment options (e.g. M-Pesa / card integration)',
-          'Order notification system via email or automated messaging',
-          'Admin instructions for adding products, updating inventory, and viewing orders',
-        ],
-        suitableFor: 'Independent retailers, product brands, and digital merchants.',
+        startingPriceKes: 'KES 30,000 – 65,000',
+        suitableFor: 'Contractors, consulting firms, manufacturers, and professional service providers.',
       },
       {
         id: 'landing-pages',
-        title: 'Landing Pages & Digital Experiences',
+        title: 'Landing Pages',
         problemSolved:
-          'Marketing promotions and paid campaigns send traffic to a generic homepage, causing visitors to bounce without taking action.',
+          'Marketing campaigns waste ad spend when sending visitors to a generic, distracted homepage.',
         whatYouReceive: [
-          'High-conversion, single-purpose landing page focused on one action',
-          'Fast-loading hero section, clear proof points, and prominent call to action',
-          'Mobile-tested form or direct messaging integration',
-          'Analytics-ready structure for campaign tracking',
+          'Focused single-page layout centered around one clear value proposition and call to action',
+          'Fast load speed, mobile-first responsiveness, and conversion-focused copy hierarchy',
+          'Lead capture form or direct WhatsApp consultation link',
         ],
-        suitableFor: 'Product launches, seasonal promotions, workshop registrations, and targeted campaigns.',
+        startingPriceKes: 'KES 15,000 – 30,000',
+        suitableFor: 'Specific product promotions, workshop registrations, seasonal campaigns, and service launches.',
       },
       {
-        id: 'company-profiles',
-        title: 'Company Profiles & Brand Collateral',
+        id: 'ecommerce-storefronts',
+        title: 'Basic E-Commerce Storefronts',
         problemSolved:
-          'Bidding for tenders, corporate contracts, or vendor approvals requires a polished corporate profile that presents capabilities credibly.',
+          'Managing orders entirely through direct messages leads to missed orders and payment confirmation delays.',
         whatYouReceive: [
-          'Executive multi-page corporate PDF profile formatted for digital sharing and print',
-          'Structured sections for company background, leadership, services, and past projects',
-          'Matching corporate letterhead, business card templates, and invoice headers',
-          'Editable source files for future team updates',
+          'Structured product catalog with categories, search, and variants',
+          'Frictionless mobile shopping cart and checkout flow',
+          'Integration with local payment gateways (e.g. M-Pesa / card gateway)',
+          'Admin guidance for updating stock and tracking orders',
         ],
-        suitableFor: 'Contractors, B2B suppliers, tender bidders, and corporate service providers.',
+        startingPriceKes: 'From KES 65,000',
+        suitableFor: 'Boutique retailers, lifestyle brands, and product merchants selling online.',
+      },
+      {
+        id: 'website-redesign-ux',
+        title: 'Website Redesign & User Experience Improvements',
+        problemSolved:
+          'Existing website looks dated, loads slowly, or confuses visitors on mobile devices.',
+        whatYouReceive: [
+          'UX audit identifying navigation confusion, broken flows, and slow assets',
+          'Modernized visual interface with improved typography and mobile layouts',
+          'Performance optimization for rapid loading across mobile networks',
+        ],
+        startingPriceKes: 'KES 20,000 – 45,000',
+        suitableFor: 'Businesses with existing web presence needing a modern, professional refresh.',
       },
     ],
+  },
+  {
+    id: 'data-systems',
+    number: '03',
+    categoryName: 'Data, Reporting & Business Systems',
+    tagline: 'Transforming raw operational data into actionable management clarity.',
+    description:
+      'Eliminating repetitive spreadsheet tasks, identifying discrepancies, and building practical visibility tools for operational decision-makers.',
+    services: [
+      {
+        id: 'excel-reporting-dashboards',
+        title: 'Excel Reporting & Dashboard Development',
+        problemSolved:
+          'Supervisors and managers waste hours compiling manual sheets with high risk of formula errors and broken links.',
+        whatYouReceive: [
+          'Automated Excel workbooks using advanced formulas, macros/VBA, or Python data routines',
+          'Single-click data aggregation and executive visual summary cards',
+          'Locked formulas and validation dropdowns preventing data-entry corruption',
+          'User guide and short walkthrough so internal staff operate it independently',
+        ],
+        startingPriceKes: 'KES 10,000 – 30,000',
+        suitableFor: 'Plant managers, inventory controllers, finance officers, and small business operators.',
+      },
+      {
+        id: 'data-cleaning-analysis',
+        title: 'Data Cleaning & Discrepancy Analysis',
+        problemSolved:
+          'Inconsistent records across production sheets, warehouse counts, and invoices make audits and planning painful.',
+        whatYouReceive: [
+          'Reconciliation routines identifying mismatches, duplicate entries, and missing values',
+          'Cleaned, structured datasets formatted for reporting or migration',
+          'Analysis summary highlighting operational variance and root cause patterns',
+        ],
+        startingPriceKes: 'KES 10,000 – 25,000',
+        suitableFor: 'Businesses conducting stock reconciliations, operational audits, or system cleanups.',
+      },
+      {
+        id: 'asset-machine-tracking',
+        title: 'Asset & Machine Tracking Tools',
+        problemSolved:
+          'Unscheduled machinery downtime because maintenance schedules and machine service logs are kept on paper or forgotten.',
+        whatYouReceive: [
+          'Digital preventive maintenance scheduling calendar and service interval alerts',
+          'Machine downtime logger categorizing electrical, mechanical, and operational stoppages',
+          'Critical spare parts min-max stock tracker with reorder alerts',
+        ],
+        startingPriceKes: 'KES 15,000 – 35,000',
+        suitableFor: 'Maintenance supervisors, workshop engineers, factory supervisors, and equipment owners.',
+      },
+      {
+        id: 'business-system-prototypes',
+        title: 'Practical Business-System Prototypes',
+        problemSolved:
+          'Multi-user spreadsheets break when shared, but enterprise ERP software costs thousands of dollars monthly.',
+        whatYouReceive: [
+          'Custom lightweight web portal for shift logging, asset lookup, or internal requests',
+          'Structured database or cloud spreadsheet backbone with multi-user form entry',
+          'Full source code ownership with zero recurring vendor lock-in',
+        ],
+        startingPriceKes: 'From KES 25,000',
+        suitableFor: 'Operations ready to move beyond fragile spreadsheets without enterprise software costs.',
+      },
+    ],
+  },
+  {
+    id: 'operations-improvement',
+    number: '04',
+    categoryName: 'Operations & Process Improvement',
+    tagline: 'Practical Lean thinking, process standardization, and waste reduction.',
+    description:
+      'Grounded in manufacturing operations since 2021. Helping teams eliminate bottlenecks, standardize workflows, and build repeatable quality.',
+    services: [
+      {
+        id: 'process-mapping-workflow',
+        title: 'Process Mapping & Workflow Analysis',
+        problemSolved:
+          'Handoffs between departments are chaotic, causing delayed orders, redundant steps, and finger-pointing.',
+        whatYouReceive: [
+          'Visual swimlane process flowcharts mapping inputs, decision gates, and handoffs',
+          'Bottleneck analysis identifying delays and non-value-adding operational steps',
+          'Streamlined workflow proposal with clear roles and accountability checkpoints',
+        ],
+        startingPriceKes: 'KES 12,000 – 30,000',
+        suitableFor: 'Manufacturing lines, logistics teams, service companies, and scaling startups.',
+      },
+      {
+        id: 'sop-documentation',
+        title: 'SOP & Procedure Documentation Package',
+        problemSolved:
+          'When key employees are absent, operations slow down or quality drops because procedures exist only in memory.',
+        whatYouReceive: [
+          'Detailed, step-by-step Standard Operating Procedures (SOPs) written in clear language',
+          'Quality control checklists, machine startup/shutdown protocols, and verification sheets',
+          'Digital template package ready for training new hires and internal audits',
+        ],
+        startingPriceKes: 'KES 8,000 – 25,000',
+        suitableFor: 'Workshops, packaging plants, processing facilities, and quality departments.',
+      },
+      {
+        id: 'lean-kaizen-support',
+        title: 'Lean & Kaizen Support',
+        problemSolved:
+          'Recurrent operational waste, cluttered workstations, and high scrap rates that eat into profit margins.',
+        whatYouReceive: [
+          'Kaizen action plans targeting prioritized waste elimination (Muda)',
+          '5S workplace organization guidance for tools, parts, and workstations',
+          'Practical shift handover protocols and daily Gemba tracking boards',
+        ],
+        startingPriceKes: 'KES 15,000 – 40,000',
+        suitableFor: 'Production lines, fabrication workshops, packaging facilities, and maintenance teams.',
+      },
+      {
+        id: 'root-cause-analysis',
+        title: 'Root-Cause Analysis & Quality Improvement',
+        problemSolved:
+          'Teams repeatedly fix the same defect on the surface instead of permanently eliminating the underlying cause.',
+        whatYouReceive: [
+          'Structured investigation using 5-Whys and Ishikawa (Fishbone) methodology',
+          'Corrective and Preventive Action (CAPA) tracking documentation',
+          'Defect trend analysis tracking repeat breakdown occurrences',
+        ],
+        startingPriceKes: 'KES 10,000 – 25,000',
+        suitableFor: 'Quality assurance teams, maintenance engineers, and plant supervisors.',
+      },
+    ],
+  },
+];
+
+export const PRICING_PACKAGES: PricingPackageItem[] = [
+  {
+    id: 'single-logo',
+    service: 'Single Logo Design Package',
+    indicativePriceKes: 'KES 5,000 – 12,000',
+    typicalScope: 'Core brand logo for new businesses or clean modernization of existing marks.',
+    whatIsIncluded: [
+      '2–3 initial distinct concept directions',
+      'Up to 3 revision rounds on chosen concept',
+      'Vector master files (AI, SVG, PDF) and high-res PNG/JPG',
+      'Monochrome, dark, and light background variations',
+    ],
+    category: 'Design',
+  },
+  {
+    id: 'flyer-poster',
+    service: 'Flyer or Poster Design',
+    indicativePriceKes: 'KES 2,000 – 5,000',
+    typicalScope: 'Single or double-sided promotional asset for a product, campaign, or event.',
+    whatIsIncluded: [
+      'Press-ready CMYK PDF with bleed and crop marks',
+      'Web-optimized JPG/PNG for WhatsApp and social sharing',
+      'Up to 2 revision rounds',
+    ],
+    category: 'Design',
+  },
+  {
+    id: 'starter-identity',
+    service: 'Starter Brand Identity',
+    indicativePriceKes: 'KES 15,000 – 35,000',
+    typicalScope: 'Cohesive visual foundation for businesses establishing professional market credibility.',
+    whatIsIncluded: [
+      'Master logo suite (primary mark, horizontal, submark, favicon)',
+      'Curated color palette with exact HEX, RGB, and CMYK values',
+      'Typography pairing rules and hierarchy guide',
+      '1-page Brand Guideline sheet for staff and printers',
+      'Business card and letterhead layout template',
+    ],
+    category: 'Design',
+  },
+  {
+    id: 'landing-page',
+    service: 'Landing Page',
+    indicativePriceKes: 'KES 15,000 – 30,000',
+    typicalScope: 'Focused one-page site covering who you are, what you offer, and clear conversion triggers.',
+    whatIsIncluded: [
+      'Responsive design tested on mobile, tablet, and desktop',
+      'Hero section, capabilities, social proof, and contact form/WhatsApp trigger',
+      'Fast load speed and semantic SEO structure',
+      'Full source code and deployment assistance',
+    ],
+    category: 'Web',
+  },
+  {
+    id: 'business-website',
+    service: 'Business Website (4–6 Pages)',
+    indicativePriceKes: 'KES 30,000 – 65,000',
+    typicalScope: 'Comprehensive digital home for established businesses, institutions, or consulting firms.',
+    whatIsIncluded: [
+      '4–6 distinct pages (Home, About, Services, Case Studies, FAQ, Contact)',
+      'Modular component architecture with type-safe modern framework',
+      'Inquiry form with email routing and direct WhatsApp integration',
+      'Standard on-page SEO meta tags and social sharing previews',
+      'Handoff documentation and staff guide for updating text and imagery',
+    ],
+    category: 'Web',
+  },
+  {
+    id: 'basic-online-store',
+    service: 'Basic Online Store',
+    indicativePriceKes: 'From KES 65,000',
+    typicalScope: 'Online store tailored for catalog management, secure checkout, and local payment gateways.',
+    whatIsIncluded: [
+      'Structured product catalog with categories, search, and variants',
+      'Shopping cart and streamlined checkout flow',
+      'Integration with local payment gateways (e.g. M-Pesa / card gateway)',
+      'Automated order confirmation emails and admin order manager',
+      'Staff training on adding products and updating inventory',
+    ],
+    category: 'Web',
+  },
+  {
+    id: 'excel-dashboard',
+    service: 'Excel Report or Dashboard',
+    indicativePriceKes: 'KES 10,000 – 30,000',
+    typicalScope: 'Eliminating repetitive manual data entry, formatting, and calculation across workbooks.',
+    whatIsIncluded: [
+      'Custom formulas, macro/VBA routines, or Python data scripts',
+      'Single-click data aggregation from multiple input sheets',
+      'Data validation rules preventing manual input typos',
+      'Short walkthrough or visual guide on using the sheet',
+    ],
+    category: 'Data & Operations',
+  },
+  {
+    id: 'sop-package',
+    service: 'SOP or Process Documentation Package',
+    indicativePriceKes: 'KES 8,000 – 25,000',
+    typicalScope: 'Standardizing critical procedures to prevent mistakes, ensure quality, and onboard staff.',
+    whatIsIncluded: [
+      'Documented Standard Operating Procedures for 2–5 core workflows',
+      'Visual flowcharts illustrating inputs, steps, and handoff points',
+      'Quality verification checklists and shift handover logs',
+      'Editable digital master templates for internal updates',
+    ],
+    category: 'Data & Operations',
+  },
+  {
+    id: 'workflow-prototype',
+    service: 'Workflow or Automation Prototype',
+    indicativePriceKes: 'From KES 25,000',
+    typicalScope: 'Custom digitisation of an internal process or custom web-based data entry tool.',
+    whatIsIncluded: [
+      'Process requirement breakdown and system architecture diagram',
+      'Working web-based prototype or multi-app integration workflow',
+      'Database setup or structured spreadsheet integration',
+      'User testing, bug fixing, and admin documentation',
+    ],
+    category: 'Data & Operations',
   },
 ];
 
@@ -290,7 +472,7 @@ export const PROJECTS_DATA: Project[] = [
     category: 'Digital Solutions & Operational Systems',
     projectType: 'Personal Venture',
     businessContext:
-      'Small and growing businesses in Kenya often face a gap between fragile Excel sheets and overpriced enterprise software. Opsloom was founded to explore and develop practical digital systems, operational reporting dashboards, and workflow automation for real business problems.',
+      'Growing businesses frequently struggle with a gap between fragile Excel sheets and bloated, expensive software. Opsloom was created to develop practical digital systems, operational reporting dashboards, and workflow automation for real business problems.',
     myContribution:
       'Conceived, designed, and developed the platform. Defined the service offerings, built the web application, developed workflow prototypes, and structured the digital presence.',
     approachAndTools:
@@ -310,7 +492,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 'bluprint',
-    name: 'Bluprint',
+    name: 'Bluprint Graphics Design',
     category: 'Brand Identity & Commercial Print Design',
     projectType: 'Commercial Client Work',
     businessContext:
@@ -358,6 +540,29 @@ export const PROJECTS_DATA: Project[] = [
     featured: true,
   },
   {
+    id: 'ultravetis-operations',
+    name: 'Manufacturing Systems & Operational Improvement',
+    category: 'Operational Systems & Quality Experience',
+    projectType: 'Operational Case Study',
+    businessContext:
+      'Manufacturing operations require strict alignment between production throughput, machine maintenance, quality control, and operational reporting. Without automated tracking, shift handovers suffer from data gaps and delayed downtime analysis.',
+    myContribution:
+      'Hands-on operational reporting, Excel-based machine-status tracking, process documentation, Kaizen and Lean improvement activities, and data-led problem-solving with cross-functional manufacturing teams.',
+    approachAndTools:
+      'Lean & Kaizen methodologies, root-cause analysis (5-Whys, Fishbone), advanced Excel modeling, VBA scripts, SOP documentation, and machine status tracking logs.',
+    deliverables: [
+      'Automated machine-status and downtime reporting models',
+      'Standardized shift handover protocols and operational log sheets',
+      'Root-cause investigation procedures and corrective action logs',
+      'Departmental SOP documentation and internal audit checklists',
+    ],
+    statusOrOutcome:
+      'Operational experience gained in active manufacturing environment since 2021, respecting employer confidentiality.',
+    image: '/images/logoh-dark.png',
+    alt: 'Manufacturing systems and operational improvement case study overview',
+    featured: true,
+  },
+  {
     id: 'wema-gardens',
     name: 'Wema Gardens',
     category: 'Event Identity & Spatial Collateral',
@@ -377,273 +582,174 @@ export const PROJECTS_DATA: Project[] = [
       'Brand identity concept completed; project materials prepared for venue launch and promotional use.',
     image: '/images/wemacard.png',
     alt: 'Wema Gardens event branding and identity preview card',
-    featured: true,
-  },
-  {
-    id: 'eabc-operations',
-    name: 'EABC Operational Systems & Digitization',
-    category: 'Manufacturing Systems & Process Improvement',
-    projectType: 'Operational Prototype',
-    businessContext:
-      'Manufacturing lines and maintenance teams often encounter operational delays due to paper-based shift handover books, manual downtime recording, and disconnected maintenance logs. This project was developed as a structured solution framework.',
-    myContribution:
-      'Mapped manufacturing workflow steps, drafted SOP documentation, built automated Excel shift handover and downtime log sheets, and prototyped a unified maintenance tracking model.',
-    approachAndTools:
-      'Kaizen/Lean root cause methodologies, advanced Excel automation, VBA scripts, Python data scripts, and process swimlane diagrams.',
-    deliverables: [
-      'Automated shift reporting workbook with downtime categorization',
-      'Equipment preventive maintenance schedule framework',
-      'Root cause analysis templates and machine trouble-shooting logs',
-      'Standard Operating Procedure (SOP) documentation',
-    ],
-    statusOrOutcome:
-      'Operational prototype and practical framework derived from hands-on manufacturing operations experience since 2021.',
-    image: '/images/logoh-dark.png',
-    alt: 'EABC operational systems and process digitization overview',
-    featured: true,
+    featured: false,
   },
 ];
 
-export const PRICING_PACKAGES: PricingCategory[] = [
+export const OPERATIONS_CASE_STUDIES: OperationsCaseStudy[] = [
   {
-    categoryName: 'Branding & Design',
-    categoryDescription:
-      'Clear, professional visual assets for businesses seeking credible market positioning.',
-    items: [
-      {
-        id: 'logo-design',
-        name: 'Logo Design',
-        priceKes: 'KES 3,500 – 7,500',
-        priceUsdApprox: '~$27 – $60 USD',
-        billingType: 'starting',
-        turnaround: '3–5 Business Days',
-        typicalScope: 'Core brand logo for new businesses or clean modernization of existing marks.',
-        deliverables: [
-          '2–3 initial distinct concept directions',
-          'Up to 3 revision rounds on chosen concept',
-          'Master vector files (AI, SVG, PDF) + high-res PNG/JPG',
-          'Monochrome, dark, and light background variations',
-        ],
-      },
-      {
-        id: 'starter-brand-identity',
-        name: 'Starter Brand Identity',
-        priceKes: 'KES 8,000 – 18,000',
-        priceUsdApprox: '~$60 – $140 USD',
-        billingType: 'starting',
-        turnaround: '1–2 Weeks',
-        typicalScope: 'Cohesive visual foundation for businesses establishing professional market credibility.',
-        deliverables: [
-          'Master logo suite (primary mark, horizontal, submark, favicon)',
-          'Curated color palette with exact HEX, RGB, and CMYK values',
-          'Typography pairing rules and hierarchy guide',
-          '1-page Brand Guideline sheet for staff and printers',
-          'Business card and letterhead layout template',
-        ],
-      },
-      {
-        id: 'flyer-poster-design',
-        name: 'Flyer or Poster Design',
-        priceKes: 'KES 1,500 – 3,500',
-        priceUsdApprox: '~$12 – $27 USD',
-        billingType: 'starting',
-        turnaround: '2–3 Business Days',
-        typicalScope: 'Single or double-sided promotional asset for a product, campaign, or event.',
-        deliverables: [
-          'Press-ready CMYK PDF with bleed and crop marks',
-          'Web-optimized JPG/PNG for WhatsApp and social sharing',
-          'Up to 2 revision rounds',
-        ],
-      },
-      {
-        id: 'company-profile-design',
-        name: 'Company Profile Design',
-        priceKes: 'KES 5,000 – 15,000',
-        priceUsdApprox: '~$40 – $115 USD',
-        billingType: 'starting',
-        turnaround: '5–8 Business Days',
-        typicalScope: 'Executive multi-page presentation (4 to 12 pages) tailored for tenders, clients, and partners.',
-        deliverables: [
-          'Structured editorial layout matching your brand identity',
-          'Services breakdown, company background, and leadership page',
-          'Print-ready high-res PDF + lightweight email-friendly PDF',
-          'Editable source file package',
-        ],
-      },
+    id: 'machine-status',
+    theme: 'Asset & Machine Tracking',
+    title: 'Machine-Status & Downtime Log Modeling',
+    problem:
+      'Unscheduled machinery stoppages were recorded informally in paper logbooks, making it difficult to analyze whether recurring downtime stemmed from electrical faults, mechanical wear, operator delays, or raw material bottlenecks.',
+    methodology: [
+      'Mapped machine stoppage categories (Mechanical, Electrical, Setup, Material)',
+      'Built a structured Excel tracking model capturing machine ID, shift, duration, and root cause',
+      'Automated Pareto analysis to identify the top 20% of failure modes causing 80% of lost hours',
     ],
+    deliverableAndValue:
+      'Standardized downtime log with automated summary charts, enabling maintenance teams to prioritize preventive part replacements before catastrophic failure.',
+    toolsUsed: ['Advanced Excel', 'VBA Data Validation', 'Pareto Analysis', 'Maintenance Logs'],
   },
   {
-    categoryName: 'Web Development',
-    categoryDescription:
-      'Responsive, clear, and professional websites designed around real business purpose rather than appearance alone.',
-    items: [
-      {
-        id: 'single-page-website',
-        name: 'Single-Page Business Website',
-        priceKes: 'KES 15,000 – 25,000',
-        priceUsdApprox: '~$115 – $195 USD',
-        billingType: 'starting',
-        turnaround: '1–2 Weeks',
-        typicalScope: 'Focused one-page site covering who you are, what you offer, past work, and clear contact links.',
-        deliverables: [
-          'Responsive design tested on mobile, tablet, and desktop',
-          'Hero section, services breakdown, about section, and contact form/WhatsApp trigger',
-          'Fast load speed and semantic SEO structure',
-          'Full source code and deployment assistance',
-        ],
-      },
-      {
-        id: 'multi-page-website',
-        name: 'Business Website (5–7 Pages)',
-        priceKes: 'KES 30,000 – 55,000',
-        priceUsdApprox: '~$230 – $425 USD',
-        billingType: 'starting',
-        turnaround: '3–4 Weeks',
-        typicalScope: 'Comprehensive digital home for established businesses, institutions, or consulting firms.',
-        deliverables: [
-          '5–7 distinct pages (Home, About, Services, Case Studies/Gallery, FAQ, Contact)',
-          'Modular component architecture with type-safe modern framework',
-          'Inquiry form with email routing or WhatsApp integration',
-          'Google Search Console setup and standard on-page SEO meta tags',
-          'Handoff documentation and staff guide for updating text/images',
-        ],
-      },
-      {
-        id: 'ecommerce-website',
-        name: 'E-Commerce Website',
-        priceKes: 'From KES 60,000',
-        priceUsdApprox: 'From ~$460 USD',
-        billingType: 'starting',
-        turnaround: '4–6 Weeks',
-        typicalScope: 'Online store tailored for catalog management, secure checkout, and local payment gateways.',
-        deliverables: [
-          'Structured product catalog with categories, search, and variants',
-          'Shopping cart and streamlined checkout flow',
-          'Integration with local payment gateways (e.g. M-Pesa / card gateway)',
-          'Automated order confirmation emails and admin order manager',
-          'Staff training on adding products and updating inventory',
-        ],
-      },
+    id: 'operational-reporting',
+    theme: 'Management Reporting',
+    title: 'Turning Raw Daily Shift Logs into Executive Management Summaries',
+    problem:
+      'Compiling weekly and monthly operational reports consumed over 8 hours of manual data entry, cutting into actual shop-floor supervision time and introducing calculation errors.',
+    methodology: [
+      'Consolidated multiple isolated shift forms into a single standardized master workbook',
+      'Created automated formula pipelines linking daily logs to weekly and monthly summaries',
+      'Built a visual KPI dashboard tracking output vs. target, scrap percentages, and efficiency',
     ],
+    deliverableAndValue:
+      'Executive dashboard updated in minutes rather than hours, giving leadership immediate visibility into weekly production trends.',
+    toolsUsed: ['Advanced Excel', 'Dynamic Array Formulas', 'KPI Scorecards', 'Operational Metrics'],
   },
   {
-    id: 'business-systems-pricing',
-    categoryName: 'Business Systems & Automation',
-    categoryDescription:
-      'Practical tools that save time, eliminate reporting errors, and improve business visibility.',
-    items: [
-      {
-        id: 'excel-automation-pricing',
-        name: 'Excel Reporting & Automation',
-        priceKes: 'KES 5,000 – 20,000',
-        priceUsdApprox: '~$40 – $155 USD',
-        billingType: 'starting',
-        turnaround: '3–7 Business Days',
-        typicalScope: 'Eliminating repetitive manual data entry, formatting, and calculation across workbooks.',
-        deliverables: [
-          'Custom formulas, macro/VBA routines, or Python data scripts',
-          'Single-click data aggregation from multiple input sheets',
-          'Data validation rules preventing manual input typos',
-          'Short video walkthrough or visual guide on using the sheet',
-        ],
-      },
-      {
-        id: 'operational-dashboard-pricing',
-        name: 'Operational Dashboards',
-        priceKes: 'KES 12,000 – 40,000',
-        priceUsdApprox: '~$95 – $310 USD',
-        billingType: 'starting',
-        turnaround: '1–2 Weeks',
-        typicalScope: 'Visual KPI tracking for daily production, inventory movement, sales, or downtime.',
-        deliverables: [
-          'Interactive dashboard with automated charts and summary scorecards',
-          'Daily, weekly, and monthly comparison views',
-          'Automated variance and threshold alert formatting',
-          'Executive printable or PDF export layout',
-        ],
-      },
-      {
-        id: 'workflow-automation-pricing',
-        name: 'Workflow Automation or Prototype',
-        priceKes: 'KES 20,000 – 75,000+',
-        priceUsdApprox: '~$155 – $580+ USD',
-        billingType: 'starting',
-        turnaround: '2–4 Weeks',
-        typicalScope: 'Custom digitisation of an internal process or custom web-based data entry tool.',
-        deliverables: [
-          'Process requirement breakdown and system architecture diagram',
-          'Working web-based prototype or multi-app integration workflow',
-          'Database setup or structured spreadsheet integration',
-          'User testing, bug fixing, and admin documentation',
-        ],
-      },
-      {
-        id: 'maintenance-support-pricing',
-        name: 'Ongoing Maintenance & Support',
-        priceKes: 'KES 3,000 – 10,000 / month',
-        priceUsdApprox: '~$25 – $80 USD/mo',
-        billingType: 'monthly',
-        turnaround: 'Continuous Support',
-        typicalScope: 'Reliable technical support, content updates, and sheet maintenance.',
-        deliverables: [
-          'Priority bug fixing and formula troubleshooting',
-          'Monthly backups and website dependency updates',
-          'Minor content additions and report formatting updates',
-          'Direct WhatsApp/email support channel during working hours',
-        ],
-      },
+    id: 'discrepancy-analysis',
+    theme: 'Data Reconciliation',
+    title: 'Investigating Process & Inventory Discrepancies',
+    problem:
+      'Recurring discrepancies between physical floor stock counts and central system records caused stockouts, delayed production orders, and audit friction.',
+    methodology: [
+      'Constructed automated reconciliation sheets using conditional matching and variance flags',
+      'Traced discrepancies across production input, scrap reporting, and finished goods handoffs',
+      'Identified root-cause failure points where operators bypassed standardized log entries',
     ],
+    deliverableAndValue:
+      'Reconciliation routine that quickly pinpoints where numbers diverge, reducing audit preparation time and improving inventory accuracy.',
+    toolsUsed: ['Excel Reconciliation Routines', 'Variance Analysis', 'Audit Checklists', 'Python Scripts'],
+  },
+  {
+    id: 'sop-structuring',
+    theme: 'Standardization',
+    title: 'Structuring Standard Operating Procedures (SOPs)',
+    problem:
+      'Critical machine setup and quality inspection procedures were stored only in the memory of senior operators, leading to high defect rates whenever new staff worked a shift.',
+    methodology: [
+      'Shadowed experienced operators to document exact sequence of preparation, operation, and safety checks',
+      'Created visual swimlane workflow diagrams depicting inputs, decisions, and required checks',
+      'Drafted clear, jargon-free SOPs formatted with visual step-by-step guidance and sign-off criteria',
+    ],
+    deliverableAndValue:
+      'Standardized documentation package adopted across teams, accelerating new operator onboarding and reducing human setup errors.',
+    toolsUsed: ['SOP Documentation', 'Swimlane Mapping', 'Visual Quality Controls', 'Kaizen Standardization'],
+  },
+  {
+    id: 'root-cause-lean',
+    theme: 'Lean & Continuous Improvement',
+    title: 'Applying 5-Whys & Root-Cause Analysis to Recurring Defects',
+    problem:
+      'Production lines experienced chronic packaging seal defects that were treated as random occurrences rather than systematically investigated.',
+    methodology: [
+      'Participated in Lean improvement activities alongside Japanese consultants and manufacturing leads',
+      'Applied 5-Whys methodology and Fishbone diagrams to drill past symptoms to the root temperature sensor failure',
+      'Formulated corrective and preventive action (CAPA) plan and recalibrated temperature inspection logs',
+    ],
+    deliverableAndValue:
+      'Eliminated recurring seal defects, demonstrating that structured root-cause investigation permanently prevents recurring operational scrap.',
+    toolsUsed: ['5-Whys Analysis', 'Ishikawa Fishbone', 'Kaizen Principles', 'CAPA Tracking'],
+  },
+  {
+    id: 'python-excel-performance',
+    theme: 'Data Analytics',
+    title: 'Operational Performance Analysis using Python & Excel',
+    problem:
+      'Large multi-month operational datasets exceeded standard spreadsheet usability, freezing computers and slowing deep trend analysis.',
+    methodology: [
+      'Wrote clean Python data scripts (Pandas) to clean, filter, and aggregate multi-file production records',
+      'Analyzed correlation between machine running speeds, ambient temperatures, and defect occurrences',
+      'Exported clean summarized tables directly into lightweight, presentation-ready Excel sheets',
+    ],
+    deliverableAndValue:
+      'Deep operational insight into machine operating parameters without requiring expensive analytics software.',
+    toolsUsed: ['Python (Pandas)', 'Data Cleansing', 'Automated Export', 'Statistical Correlation'],
   },
 ];
 
 export const WORK_PROCESS_STEPS: WorkStep[] = [
   {
     number: '01',
-    title: 'Discovery & Requirements',
-    summary: 'Understanding the real problem before suggesting tools.',
+    title: 'Understand the Business Problem',
+    summary: 'Diagnosing the root challenge before recommending tools.',
     description:
-      'We start with a conversation to understand your business context, current operational pain points, audience, and exact goals. I don’t recommend unnecessary tech—only what genuinely serves your business outcome.',
-    keyDeliverable: 'Clear requirement summary and agreed objective.',
+      'We start with an honest conversation about what is actually causing friction—whether it is a bottlenecked manual reporting sheet, an unconvincing brand identity, or a messy handoff. I focus on the outcome your business needs, not unnecessary technology.',
+    deliverable: 'Agreed problem statement and objective.',
   },
   {
     number: '02',
-    title: 'Scope & Proposal',
-    summary: 'Transparent deliverables, timelines, and payment milestones.',
+    title: 'Define Scope & Expected Result',
+    summary: 'Clear written boundaries, timelines, and milestones.',
     description:
-      'You receive a written proposal outlining the exact scope of work, timeline, deliverables, and payment schedule. Everything is agreed upon in advance so there are no surprise costs or hidden scope creep.',
-    keyDeliverable: 'Detailed project proposal and milestone agreement.',
+      'You receive an itemized proposal detailing the exact deliverables, turnaround schedule, and payment milestones. Everything is transparent upfront with zero unexpected costs or unagreed additions.',
+    deliverable: 'Written scope proposal and milestone agreement.',
   },
   {
     number: '03',
-    title: 'Design & Development',
-    summary: 'Structured execution with regular milestone updates.',
+    title: 'Analyse Requirements & Information',
+    summary: 'Auditing available data, assets, and constraints.',
     description:
-      'Work proceeds in structured stages—whether drafting brand identities, building web pages, or writing automation scripts. I share working previews for feedback so you remain in control of the direction.',
-    keyDeliverable: 'Working drafts, prototypes, or code preview.',
+      'I inspect your existing spreadsheets, brand files, workflow steps, or content. If data is dirty or content is missing, we address it here so development proceeds on solid ground.',
+    deliverable: 'Information audit and architecture plan.',
   },
   {
     number: '04',
-    title: 'Review & Practical Testing',
-    summary: 'Rigorous quality checks before anything goes live.',
+    title: 'Develop the Solution',
+    summary: 'Structured execution with regular preview updates.',
     description:
-      'Drawing on 5 years of manufacturing quality assurance: spreadsheets are tested with edge-case data, print layouts are proofed for color fidelity, and websites are tested across mobile, tablet, and desktop screens.',
-    keyDeliverable: 'Testing verification and client sign-off.',
+      'Work proceeds in structured stages—whether writing clean React/TypeScript code, building automated Excel formulas, or vectorizing brand identity assets. You receive working previews to ensure alignment.',
+    deliverable: 'Working drafts, prototypes, or code preview.',
   },
   {
     number: '05',
-    title: 'Delivery & Handover',
-    summary: 'Complete source assets and user documentation.',
+    title: 'Test, Refine & Deliver',
+    summary: 'Rigorous verification before anything goes live.',
     description:
-      'You receive all final assets: vector design files, full website source code, or unlocked Excel workbooks. Every project includes straightforward instructions or a short walkthrough so your team can work independently.',
-    keyDeliverable: 'Final deliverables package, source files, and instructions.',
+      'Drawing on 5 years of manufacturing quality assurance: workbooks are stress-tested with edge cases, websites are tested across mobile and desktop browsers, and print files are verified for color separation and bleeds.',
+    deliverable: 'Tested solution and client sign-off.',
   },
   {
     number: '06',
-    title: 'Optional Ongoing Support',
-    summary: 'Reliable assistance whenever your business evolves.',
+    title: 'Handover & Ongoing Support',
+    summary: 'Complete source assets and user instructions.',
     description:
-      'After handover, I remain available for scheduled maintenance, report updates, feature additions, or technical guidance as your business grows.',
-    keyDeliverable: 'On-demand or monthly support agreement.',
+      'You receive all final assets—unlocked spreadsheets, vector files, or clean source code—along with straightforward user guides. I explain the handover clearly and remain available for scheduled ongoing support.',
+    deliverable: 'Full source handoff, user guide, and support options.',
+  },
+];
+
+export const WHY_WORK_WITH_ME: { title: string; desc: string }[] = [
+  {
+    title: 'I consider the business problem, not only the requested deliverable',
+    desc: 'If a client asks for a new website when their real bottleneck is internal order tracking, I help identify what will actually drive commercial value.',
+  },
+  {
+    title: 'I connect process thinking with data and technology',
+    desc: 'Drawing on 5 years of manufacturing operations, Kaizen, and IT discipline, I build tools that operate reliably in real-world conditions.',
+  },
+  {
+    title: 'I value clarity, usability, and practical outcomes',
+    desc: 'No speculative jargon, no bloated software subscriptions, and no over-engineered solutions. I build what your team can comfortably maintain.',
+  },
+  {
+    title: 'I work across both analytical and creative tasks',
+    desc: 'You do not need to hire one person for spreadsheet automation and another for your brand identity. I bridge both sides of the problem.',
+  },
+  {
+    title: 'I aim for solutions that fit your needs and budget',
+    desc: 'With transparent starting prices in KES, clear milestone payments, and modular scopes, businesses get exceptional value without financial surprises.',
   },
 ];
 
@@ -651,12 +757,12 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'How much does a typical project cost?',
     answer:
-      'Project costs depend on the specific scope, complexity, and turnaround required. Our starting ranges are transparent: logo design begins from KES 3,500, business websites start from KES 15,000, and Excel reporting automation starts from KES 5,000. Every project receives an itemized quote before work begins, with no unexpected fees.',
+      'Project costs depend on the specific scope, complexity, and turnaround required. All prices are transparently displayed in KES: logo design begins from KES 5,000, business websites start from KES 30,000, and Excel reporting automation starts from KES 10,000. Every project receives an itemized quote before work begins, with no unexpected fees.',
   },
   {
     question: 'How long does a website take to build and launch?',
     answer:
-      'A single-page business website typically takes 1 to 2 weeks from content approval. A 5–7 page business website usually requires 3 to 4 weeks. E-commerce sites and custom systems generally take 4 to 6 weeks. Timelines depend heavily on prompt feedback and having your business content (text and photos) ready.',
+      'A landing page or single-page site typically takes 1 to 2 weeks from content approval. A 4–6 page business website usually requires 3 to 4 weeks. E-commerce storefronts and custom systems generally take 4 to 6 weeks. Timelines depend heavily on prompt feedback and having your business content (text and photos) ready.',
   },
   {
     question: 'Can I request a service within a specific or limited budget?',
@@ -666,7 +772,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Do you work with clients outside Kenya?',
     answer:
-      'Yes. I work with clients both in Kenya and internationally. For international engagements, communication is conducted via WhatsApp, Google Meet, and email. Pricing can be referenced in USD, and payments can be handled securely through international transfer or card options.',
+      'Yes. I work with clients both in Kenya and internationally. Communication is conducted via WhatsApp, Google Meet, and email. While primary prices are in KES, international agreements can be quoted with an equivalent USD reference, and payments can be handled securely through international transfer or card options.',
   },
   {
     question: 'Can you improve an existing website or messy spreadsheet?',
@@ -674,9 +780,9 @@ export const FAQ_ITEMS: FAQItem[] = [
       'Absolutely. You do not always need to start from scratch. I regularly help businesses clean and automate existing Excel spreadsheets, fix formula errors, or modernize an existing outdated website to improve its credibility and mobile responsiveness.',
   },
   {
-    question: 'Do you provide ongoing technical support after the project is delivered?',
+    question: 'Do you provide ongoing technical support after delivery?',
     answer:
-      'Yes. Every delivered project includes a standard 14-day warranty period for bug fixes and questions related to the agreed scope. For ongoing support, monthly maintenance packages are available starting from KES 3,000/month covering backups, updates, and minor adjustments.',
+      'Yes. Every delivered project includes a standard 14-day warranty period for bug fixes and questions related to the agreed scope. For ongoing support, monthly maintenance agreements are available covering backups, updates, minor additions, and priority troubleshooting.',
   },
   {
     question: 'What happens if my project requirements change mid-way?',

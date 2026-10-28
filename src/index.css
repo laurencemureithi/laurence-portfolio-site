@@ -2,13 +2,29 @@
 
 @layer base {
   :root {
-    --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
-    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color-scheme: dark;
+
+    /* Theme tokens */
+    --canvas-bg: #060b14;
+    --canvas-surface: #0c1424;
+    --canvas-border: rgba(255, 255, 255, 0.08);
+    --accent-lime: #a3e635;
+    --accent-lime-hover: #bef264;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
   }
 
   body.light-theme {
     color-scheme: light;
+    --canvas-bg: #f8fafc;
+    --canvas-surface: #ffffff;
+    --canvas-border: #e2e8f0;
+    --accent-lime: #65a30d;
+    --accent-lime-hover: #4d7c0f;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
   }
 
   html {
@@ -18,44 +34,55 @@
 
   h1, h2, h3, h4, h5, h6, .font-display {
     font-family: var(--font-display);
+    letter-spacing: -0.025em;
   }
 
   /* Custom subtle scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(150, 150, 150, 0.2);
+    background: rgba(163, 230, 53, 0.2);
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(150, 150, 150, 0.4);
+    background: rgba(163, 230, 53, 0.4);
   }
 }
 
-/* Background subtle ambient glows */
-.ambient-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+/* Ambient Navy Glow */
+.ambient-navy-glow {
+  background: radial-gradient(circle at 50% -10%, rgba(163, 230, 53, 0.08) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 75%);
 }
 
-body.light-theme .ambient-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(14, 165, 164, 0.06) 0%, transparent 60%);
+body.light-theme .ambient-navy-glow {
+  background: radial-gradient(circle at 50% -10%, rgba(101, 163, 13, 0.08) 0%, transparent 65%);
 }
 
-/* Noise overlay for organic texture */
-.subtle-grid {
-  background-size: 32px 32px;
+/* Precision Architectural Grid */
+.architectural-grid {
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
 }
 
-body.light-theme .subtle-grid {
+body.light-theme .architectural-grid {
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+}
+
+/* Restrained motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

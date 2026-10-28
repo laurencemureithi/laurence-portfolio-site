@@ -6,14 +6,14 @@ interface HeaderProps {
   theme: 'dark' | 'light';
   onToggleTheme: () => void;
   activeSection: string;
-  onDiscussProject: () => void;
+  onStartProject: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   theme,
   onToggleTheme,
   activeSection,
-  onDiscussProject,
+  onStartProject,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -29,6 +29,10 @@ export const Header: React.FC<HeaderProps> = ({
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    if (targetId === '#' || targetId === 'body') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const element = document.querySelector(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -39,89 +43,89 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={`sticky top-0 z-50 transition-all duration-200 border-b ${
         scrolled
-          ? 'bg-[#0b0f17]/90 dark:bg-[#0b0f17]/90 light-theme:bg-white/95 backdrop-blur-md border-white/10 dark:border-white/10 light-theme:border-slate-200 shadow-md shadow-black/10'
-          : 'bg-[#0b0f17]/70 dark:bg-[#0b0f17]/70 light-theme:bg-white/80 backdrop-blur-sm border-white/5 dark:border-white/5 light-theme:border-slate-200/50'
+          ? 'bg-[#060b14]/92 dark:bg-[#060b14]/92 light-theme:bg-white/95 backdrop-blur-md border-white/10 dark:border-white/10 light-theme:border-slate-200 shadow-md shadow-black/20'
+          : 'bg-[#060b14]/75 dark:bg-[#060b14]/75 light-theme:bg-white/80 backdrop-blur-sm border-white/5 dark:border-white/5 light-theme:border-slate-200/50'
       }`}
     >
-      <div className="max-w-[1280px] mx-auto px-6 h-18 flex items-center justify-between gap-8">
-        {/* Zone 1: Brand Wordmark */}
+      <div className="max-w-[1280px] mx-auto px-6 h-18 flex items-center justify-between gap-6">
+        {/* Brand Wordmark */}
         <a
           href="#"
           onClick={(e) => handleNavClick(e, 'body')}
-          className="text-lg font-bold tracking-tight text-white dark:text-white light-theme:text-slate-900 whitespace-nowrap shrink-0 flex items-center gap-2.5 group"
+          className="text-lg font-bold tracking-tight text-white dark:text-white light-theme:text-slate-950 whitespace-nowrap shrink-0 flex items-center gap-2.5 group"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 group-hover:scale-125 transition-transform" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#a3e635] shadow-[0_0_10px_rgba(163,230,53,0.5)] group-hover:scale-125 transition-transform" />
           <span className="font-display">{PERSONAL_INFO.fullName}</span>
         </a>
 
-        {/* Zone 2: Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300 dark:text-slate-300 light-theme:text-slate-600">
-          <a
-            href="#work"
-            onClick={(e) => handleNavClick(e, '#work')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'work' ? 'text-emerald-400 font-semibold' : ''
-            }`}
-          >
-            Work
-          </a>
-          <a
-            href="#services"
-            onClick={(e) => handleNavClick(e, '#services')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'services' ? 'text-emerald-400 font-semibold' : ''
-            }`}
-          >
-            Services
-          </a>
+        {/* Navigation Links */}
+        <nav className="hidden xl:flex items-center gap-6 text-xs font-semibold uppercase tracking-wider text-slate-300 dark:text-slate-300 light-theme:text-slate-600">
           <a
             href="#about"
             onClick={(e) => handleNavClick(e, '#about')}
             className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'about' ? 'text-emerald-400 font-semibold' : ''
+              activeSection === 'about' ? 'text-[#a3e635] font-bold' : ''
             }`}
           >
             About
           </a>
           <a
+            href="#services"
+            onClick={(e) => handleNavClick(e, '#services')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
+              activeSection === 'services' ? 'text-[#a3e635] font-bold' : ''
+            }`}
+          >
+            Capabilities
+          </a>
+          <a
+            href="#work"
+            onClick={(e) => handleNavClick(e, '#work')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
+              activeSection === 'work' ? 'text-[#a3e635] font-bold' : ''
+            }`}
+          >
+            Selected Work
+          </a>
+          <a
+            href="#operations"
+            onClick={(e) => handleNavClick(e, '#operations')}
+            className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
+              activeSection === 'operations' ? 'text-[#a3e635] font-bold' : ''
+            }`}
+          >
+            Operations &amp; Data
+          </a>
+          <a
             href="#pricing"
             onClick={(e) => handleNavClick(e, '#pricing')}
             className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'pricing' ? 'text-emerald-400 font-semibold' : ''
+              activeSection === 'pricing' ? 'text-[#a3e635] font-bold' : ''
             }`}
           >
-            Pricing
+            Pricing (KES)
           </a>
           <a
             href="#process"
             onClick={(e) => handleNavClick(e, '#process')}
             className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'process' ? 'text-emerald-400 font-semibold' : ''
+              activeSection === 'process' ? 'text-[#a3e635] font-bold' : ''
             }`}
           >
-            How I Work
-          </a>
-          <a
-            href="#faq"
-            onClick={(e) => handleNavClick(e, '#faq')}
-            className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'faq' ? 'text-emerald-400 font-semibold' : ''
-            }`}
-          >
-            FAQ
+            Process
           </a>
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
             className={`whitespace-nowrap shrink-0 transition-colors py-1 hover:text-white dark:hover:text-white light-theme:hover:text-slate-900 ${
-              activeSection === 'contact' ? 'text-emerald-400 font-semibold' : ''
+              activeSection === 'contact' ? 'text-[#a3e635] font-bold' : ''
             }`}
           >
             Contact
           </a>
         </nav>
 
-        {/* Zone 3: CTA & Theme Toggle */}
+        {/* CTA & Theme Controls */}
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={onToggleTheme}
@@ -133,18 +137,18 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           <button
-            onClick={onDiscussProject}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-950 bg-emerald-400 hover:bg-emerald-300 active:scale-98 rounded-xl shadow-sm shadow-emerald-500/20 transition-all cursor-pointer whitespace-nowrap shrink-0"
+            onClick={onStartProject}
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-[#a3e635] hover:bg-[#bef264] active:scale-98 rounded-xl shadow-sm shadow-lime-500/20 transition-all cursor-pointer whitespace-nowrap shrink-0"
           >
-            <span>Discuss a Project</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Start a Project</span>
+            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
-            className="lg:hidden w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 dark:text-slate-300 light-theme:text-slate-700 bg-white/5 dark:bg-white/5 light-theme:bg-slate-100 border border-white/10 dark:border-white/10 light-theme:border-slate-300 cursor-pointer"
+            className="xl:hidden w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 dark:text-slate-300 light-theme:text-slate-700 bg-white/5 dark:bg-white/5 light-theme:bg-slate-100 border border-white/10 dark:border-white/10 light-theme:border-slate-300 cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -153,64 +157,64 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Accessible Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden px-6 py-5 bg-[#0b0f17] dark:bg-[#0b0f17] light-theme:bg-white border-b border-white/10 dark:border-white/10 light-theme:border-slate-200 shadow-2xl flex flex-col gap-3.5 animate-in fade-in duration-150">
+        <div className="xl:hidden px-6 py-5 bg-[#060b14] dark:bg-[#060b14] light-theme:bg-white border-b border-white/10 dark:border-white/10 light-theme:border-slate-200 shadow-2xl flex flex-col gap-3 animate-in fade-in duration-150">
           <a
-            href="#work"
-            onClick={(e) => handleNavClick(e, '#work')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
+            href="#about"
+            onClick={(e) => handleNavClick(e, '#about')}
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
           >
-            Work &amp; Case Studies
+            About Background &amp; Training
           </a>
           <a
             href="#services"
             onClick={(e) => handleNavClick(e, '#services')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
           >
-            Services (Operations &amp; Design)
+            Capabilities (4 Categories)
           </a>
           <a
-            href="#about"
-            onClick={(e) => handleNavClick(e, '#about')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
+            href="#work"
+            onClick={(e) => handleNavClick(e, '#work')}
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
           >
-            About My Background
+            Selected Work (Opsloom, Bluprint, NexusPulse)
+          </a>
+          <a
+            href="#operations"
+            onClick={(e) => handleNavClick(e, '#operations')}
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
+          >
+            Operations &amp; Data Case Studies
           </a>
           <a
             href="#pricing"
             onClick={(e) => handleNavClick(e, '#pricing')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
           >
-            Pricing &amp; Packages
+            Pricing &amp; Rates in KES
           </a>
           <a
             href="#process"
             onClick={(e) => handleNavClick(e, '#process')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
           >
-            How I Work
-          </a>
-          <a
-            href="#faq"
-            onClick={(e) => handleNavClick(e, '#faq')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
-          >
-            Frequently Asked Questions
+            How I Work (6 Steps)
           </a>
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="text-base font-medium text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-emerald-400"
+            className="text-sm font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 py-1 hover:text-[#a3e635]"
           >
             Contact
           </a>
           <button
             onClick={() => {
               setMobileMenuOpen(false);
-              onDiscussProject();
+              onStartProject();
             }}
-            className="mt-2 w-full py-3 px-4 text-center font-semibold text-xs uppercase tracking-wider text-slate-950 bg-emerald-400 rounded-xl"
+            className="mt-2 w-full py-3 px-4 text-center font-bold text-xs uppercase tracking-wider text-slate-950 bg-[#a3e635] rounded-xl"
           >
-            Discuss a Project
+            Start a Project
           </button>
         </div>
       )}

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { SelectedWork } from './components/SelectedWork';
-import { Services } from './components/Services';
 import { About } from './components/About';
+import { Services } from './components/Services';
+import { SelectedWork } from './components/SelectedWork';
+import { OperationsCaseStudies } from './components/OperationsCaseStudies';
 import { Pricing } from './components/Pricing';
 import { Process } from './components/Process';
-import { TrustApproach } from './components/TrustApproach';
+import { WhyWorkWithMe } from './components/WhyWorkWithMe';
 import { FAQ } from './components/FAQ';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -25,13 +26,13 @@ export function App() {
   useEffect(() => {
     if (theme === 'light') {
       document.body.classList.add('light-theme');
-      document.body.classList.remove('bg-[#0b0f17]', 'text-[#e2e8f0]');
-      document.body.classList.add('bg-[#fafafa]', 'text-[#09090b]');
+      document.body.classList.remove('bg-[#060b14]', 'text-[#f8fafc]');
+      document.body.classList.add('bg-[#f8fafc]', 'text-[#0f172a]');
       localStorage.setItem('theme', 'light');
     } else {
       document.body.classList.remove('light-theme');
-      document.body.classList.remove('bg-[#fafafa]', 'text-[#09090b]');
-      document.body.classList.add('bg-[#0b0f17]', 'text-[#e2e8f0]');
+      document.body.classList.remove('bg-[#f8fafc]', 'text-[#0f172a]');
+      document.body.classList.add('bg-[#060b14]', 'text-[#f8fafc]');
       localStorage.setItem('theme', 'dark');
     }
   }, [theme]);
@@ -39,7 +40,7 @@ export function App() {
   // Scroll spy for navigation
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['work', 'services', 'about', 'pricing', 'process', 'faq', 'contact'];
+      const sections = ['about', 'services', 'work', 'operations', 'pricing', 'process', 'faq', 'contact'];
       const scrollPos = window.scrollY + 240;
 
       for (const sectionId of sections) {
@@ -80,36 +81,40 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen subtle-grid transition-colors duration-300">
+    <div className="min-h-screen architectural-grid transition-colors duration-300">
       <Header
         theme={theme}
         onToggleTheme={toggleTheme}
         activeSection={activeSection}
-        onDiscussProject={() => scrollToContact()}
+        onStartProject={() => scrollToContact()}
       />
 
       <main>
         <Hero
-          onViewWork={scrollToWork}
-          onDiscussProject={() => scrollToContact()}
-        />
-
-        <SelectedWork />
-
-        <Services
-          onSelectService={(serviceTitle) => scrollToContact(serviceTitle)}
+          onExploreWork={scrollToWork}
+          onStartProject={() => scrollToContact()}
         />
 
         <About />
 
+        <Services
+          onSelectService={(serviceTitle, startingPrice) =>
+            scrollToContact(serviceTitle, startingPrice)
+          }
+        />
+
+        <SelectedWork />
+
+        <OperationsCaseStudies />
+
         <Pricing
           onSelectPackage={(pkgName, price) => scrollToContact(pkgName, price)}
-          onCustomProject={() => scrollToContact('Custom Project Scope')}
+          onRequestCustomQuote={() => scrollToContact('Custom Multi-Disciplinary Scope')}
         />
 
         <Process />
 
-        <TrustApproach />
+        <WhyWorkWithMe onStartProject={() => scrollToContact()} />
 
         <FAQ />
 

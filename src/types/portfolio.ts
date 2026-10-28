@@ -2,8 +2,8 @@ export type {
   Project,
   ServiceItem,
   ServiceCategory,
-  PricingItem,
-  PricingCategory,
+  PricingPackageItem,
+  OperationsCaseStudy,
   WorkStep,
   FAQItem,
 } from '../data/portfolio';
