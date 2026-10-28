@@ -6,30 +6,87 @@
     --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color-scheme: dark;
 
-    /* Theme tokens */
-    --canvas-bg: #060b14;
-    --canvas-surface: #0c1424;
-    --canvas-border: rgba(255, 255, 255, 0.08);
-    --accent-lime: #a3e635;
-    --accent-lime-hover: #bef264;
+    /* Dark Theme Palette (Default) */
+    --bg-page: #060b14;
+    --bg-header: rgba(6, 11, 20, 0.88);
+    --bg-card: #0c1424;
+    --bg-card-subtle: #101c34;
+    --bg-card-hover: #14213d;
+    --bg-input: #080e1a;
+    --bg-pill: rgba(255, 255, 255, 0.05);
+
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-card: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(163, 230, 53, 0.35);
+
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+
+    --accent: #a3e635;
+    --accent-hover: #bef264;
+    --accent-text: #041a12;
+    --accent-glow: rgba(163, 230, 53, 0.25);
+    --accent-badge-bg: rgba(163, 230, 53, 0.1);
+    --accent-badge-border: rgba(163, 230, 53, 0.25);
+    --accent-badge-text: #bef264;
+
+    --problem-bg: rgba(69, 10, 10, 0.25);
+    --problem-border: rgba(239, 68, 68, 0.2);
+    --problem-text: #fca5a5;
+
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --grid-line: rgba(255, 255, 255, 0.025);
   }
 
+  [data-theme="light"],
   body.light-theme {
     color-scheme: light;
-    --canvas-bg: #f8fafc;
-    --canvas-surface: #ffffff;
-    --canvas-border: #e2e8f0;
-    --accent-lime: #65a30d;
-    --accent-lime-hover: #4d7c0f;
+
+    /* Light Theme Palette: Crisp, Executive, Stripe/Apple-grade contrast */
+    --bg-page: #f8fafc;
+    --bg-header: rgba(255, 255, 255, 0.92);
+    --bg-card: #ffffff;
+    --bg-card-subtle: #f1f5f9;
+    --bg-card-hover: #f8fafc;
+    --bg-input: #ffffff;
+    --bg-pill: #e2e8f0;
+
+    --border-subtle: #e2e8f0;
+    --border-card: #e2e8f0;
+    --border-hover: #16a34a;
+
     --text-primary: #0f172a;
-    --text-secondary: #475569;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+
+    --accent: #16a34a;
+    --accent-hover: #15803d;
+    --accent-text: #ffffff;
+    --accent-glow: rgba(22, 163, 74, 0.2);
+    --accent-badge-bg: #f0fdf4;
+    --accent-badge-border: #bbf7d0;
+    --accent-badge-text: #166534;
+
+    --problem-bg: #fef2f2;
+    --problem-border: #fecaca;
+    --problem-text: #991b1b;
+
+    --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+    --grid-line: rgba(15, 23, 42, 0.035);
   }
 
   html {
     scroll-behavior: smooth;
     font-family: var(--font-body);
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   h1, h2, h3, h4, h5, h6, .font-display {
@@ -46,35 +103,203 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(163, 230, 53, 0.2);
+    background: var(--border-subtle);
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(163, 230, 53, 0.4);
+    background: var(--text-dim);
   }
-}
-
-/* Ambient Navy Glow */
-.ambient-navy-glow {
-  background: radial-gradient(circle at 50% -10%, rgba(163, 230, 53, 0.08) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 75%);
-}
-
-body.light-theme .ambient-navy-glow {
-  background: radial-gradient(circle at 50% -10%, rgba(101, 163, 13, 0.08) 0%, transparent 65%);
 }
 
 /* Precision Architectural Grid */
 .architectural-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
 }
 
-body.light-theme .architectural-grid {
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+/* Ambient glow header gradient */
+.ambient-glow {
+  background: radial-gradient(circle at 50% -10%, rgba(163, 230, 53, 0.08) 0%, rgba(15, 23, 42, 0.3) 40%, transparent 75%);
+}
+
+[data-theme="light"] .ambient-glow,
+body.light-theme .ambient-glow {
+  background: radial-gradient(circle at 50% -10%, rgba(22, 163, 74, 0.08) 0%, transparent 65%);
+}
+
+/* ==============================================================
+   UNIVERSAL THEME OVERRIDES FOR SEAMLESS LIGHT & DARK MODE
+   This guarantees that every card, heading, paragraph, input, 
+   border, and icon adapts without a single unreadable word!
+   ============================================================== */
+
+[data-theme="light"],
+body.light-theme {
+  /* Headings & High Contrast Text */
+  .text-white,
+  .dark\:text-white {
+    color: #0f172a !important;
+  }
+
+  .text-slate-100 {
+    color: #0f172a !important;
+  }
+
+  .text-slate-200,
+  .dark\:text-slate-200 {
+    color: #1e293b !important;
+  }
+
+  .text-slate-300,
+  .dark\:text-slate-300 {
+    color: #334155 !important;
+  }
+
+  .text-slate-400,
+  .dark\:text-slate-400 {
+    color: #64748b !important;
+  }
+
+  /* Backgrounds: Convert dark containers into clean white & soft slate */
+  .bg-\[\#060b14\],
+  .dark\:bg-\[\#060b14\],
+  .bg-\[\#070b12\],
+  .dark\:bg-\[\#070b12\],
+  .bg-\[\#080d19\],
+  .dark\:bg-\[\#080d19\],
+  .bg-\[\#0c1424\],
+  .dark\:bg-\[\#0c1424\],
+  .bg-\[\#111827\],
+  .dark\:bg-\[\#111827\] {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+  }
+
+  .bg-\[\#0c1424\]\/92,
+  .bg-\[\#060b14\]\/92,
+  .bg-\[\#060b14\]\/75 {
+    background-color: rgba(255, 255, 255, 0.94) !important;
+  }
+
+  /* Subtle Surfaces & Inputs */
+  .bg-white\/\[0\.01\],
+  .bg-white\/\[0\.02\],
+  .bg-white\/\[0\.03\],
+  .bg-white\/\[0\.04\],
+  .bg-white\/5,
+  .bg-white\/10 {
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Problem Boxes */
+  .bg-red-950\/20,
+  .dark\:bg-red-950\/20 {
+    background-color: #fef2f2 !important;
+    border-color: #fecaca !important;
+  }
+  .text-red-300,
+  .dark\:text-red-300 {
+    color: #991b1b !important;
+  }
+
+  /* Gradients */
+  .from-\[\#0c1424\],
+  .via-\[\#111c34\],
+  .to-\[\#0c1424\] {
+    --tw-gradient-from: #f0fdf4 !important;
+    --tw-gradient-via: #ffffff !important;
+    --tw-gradient-to: #f8fafc !important;
+  }
+
+  /* Borders */
+  .border-white\/5,
+  .border-white\/10,
+  .border-white\/15,
+  .border-white\/20,
+  .dark\:border-white\/5,
+  .dark\:border-white\/10,
+  .dark\:border-white\/15 {
+    border-color: #e2e8f0 !important;
+  }
+
+  /* Hero Gradient Text in Light Mode */
+  .hero-gradient-text {
+    background-image: linear-gradient(to right, #15803d, #047857, #0f766e) !important;
+    -webkit-background-clip: text !important;
+    color: transparent !important;
+  }
+
+  /* Badges in Light Mode */
+  .bg-sky-950\/30 {
+    background-color: #f0f9ff !important;
+    border-color: #bae6fd !important;
+  }
+  .text-sky-400 {
+    color: #0369a1 !important;
+  }
+
+  .bg-amber-950\/30 {
+    background-color: #fffbeb !important;
+    border-color: #fde68a !important;
+  }
+  .text-amber-400 {
+    color: #92400e !important;
+  }
+
+  .bg-purple-950\/30 {
+    background-color: #faf5ff !important;
+    border-color: #e9d5ff !important;
+  }
+  .text-purple-400 {
+    color: #6b21a8 !important;
+  }
+
+  /* Accents in Light Mode: Switch to High-Contrast Emerald */
+  .text-\[\#a3e635\] {
+    color: #166534 !important;
+  }
+  .bg-\[\#a3e635\]\/10,
+  .bg-\[\#a3e635\]\/20 {
+    background-color: #f0fdf4 !important;
+    color: #166534 !important;
+  }
+  .border-\[\#a3e635\]\/20,
+  .border-\[\#a3e635\]\/30,
+  .border-\[\#a3e635\]\/40 {
+    border-color: #bbf7d0 !important;
+  }
+
+  /* Form inputs in Light Mode */
+  input,
+  select,
+  textarea {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  /* Active CTA Button in Light Mode */
+  button.bg-\[\#a3e635\],
+  a.bg-\[\#a3e635\],
+  .bg-\[\#a3e635\] {
+    background-color: #16a34a !important;
+    color: #ffffff !important;
+  }
+  button.bg-\[\#a3e635\]:hover,
+  a.bg-\[\#a3e635\]:hover {
+    background-color: #15803d !important;
+  }
+
+  /* Active filter pills */
+  button.bg-\[\#a3e635\].text-slate-950 {
+    color: #ffffff !important;
+  }
 }
 
 /* Restrained motion support */

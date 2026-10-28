@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle2, Info, ArrowUpRight, MessageSquare } from 'lucide-react';
 import { PRICING_PACKAGES, PricingPackageItem } from '../data/portfolio';
+import { ScopeCalculator } from './ScopeCalculator';
 
 interface PricingProps {
   onSelectPackage: (packageName: string, price: string) => void;
@@ -158,6 +159,18 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectPackage, onRequestCust
             </div>
           </div>
         </div>
+
+        {/* Interactive Scope & Budget Estimator */}
+        <ScopeCalculator
+          onBookScope={(selectedNames, totalRange) => {
+            onSelectPackage(
+              `Custom Package (${selectedNames.length} items): ${selectedNames.slice(0, 2).join(', ')}${
+                selectedNames.length > 2 ? '...' : ''
+              }`,
+              totalRange
+            );
+          }}
+        />
 
         {/* Pricing Terms & Inclusions Disclosure */}
         <div className="mt-12 p-6 rounded-2xl bg-white/[0.02] dark:bg-white/[0.02] light-theme:bg-slate-100 border border-white/5 dark:border-white/5 light-theme:border-slate-200 text-xs text-slate-400 dark:text-slate-400 light-theme:text-slate-600 space-y-2">

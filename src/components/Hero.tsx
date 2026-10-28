@@ -30,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onStartProject }) => 
             {/* Memorable Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white dark:text-white light-theme:text-slate-950 leading-[1.08] text-balance">
               “I turn business problems into{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a3e635] via-emerald-400 to-teal-300">
+              <span className="hero-gradient-text text-transparent bg-clip-text bg-gradient-to-r from-[#a3e635] via-emerald-400 to-teal-300">
                 better systems, smarter operations,
               </span>{' '}
               and digital experiences that work.”

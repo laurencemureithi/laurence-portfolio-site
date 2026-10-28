@@ -1,8 +1,13 @@
 import React from 'react';
 import { Cpu, CheckCircle2, HelpCircle } from 'lucide-react';
 import { OPERATIONS_CASE_STUDIES, OperationsCaseStudy } from '../data/portfolio';
+import { OperationsSimulator } from './OperationsSimulator';
 
-export const OperationsCaseStudies: React.FC = () => {
+interface OperationsCaseStudiesProps {
+  onDiscussOperations?: (savings: string) => void;
+}
+
+export const OperationsCaseStudies: React.FC<OperationsCaseStudiesProps> = ({ onDiscussOperations }) => {
   return (
     <section id="operations" className="py-20 md:py-28 relative">
       <div className="max-w-[1280px] mx-auto px-6">
@@ -90,6 +95,18 @@ export const OperationsCaseStudies: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* Interactive ROI & Friction Simulator */}
+        <OperationsSimulator
+          onDiscussOperations={(savings) => {
+            if (onDiscussOperations) {
+              onDiscussOperations(savings);
+            } else {
+              const el = document.getElementById('contact');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+        />
 
         {/* Confidentiality & Context Disclaimer */}
         <div className="mt-10 p-5 rounded-2xl bg-white/[0.02] dark:bg-white/[0.02] light-theme:bg-slate-100 border border-white/5 dark:border-white/5 light-theme:border-slate-200 flex items-start gap-3 text-xs text-slate-400 dark:text-slate-400 light-theme:text-slate-600">

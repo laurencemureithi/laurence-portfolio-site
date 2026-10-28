@@ -22,17 +22,22 @@ export function App() {
   const [selectedServiceForContact, setSelectedServiceForContact] = useState<string>('');
   const [selectedBudgetForContact, setSelectedBudgetForContact] = useState<string>('');
 
-  // Apply theme class to body
+  // Apply theme attributes and classes to html and body
   useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.body.setAttribute('data-theme', theme);
+
     if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
       document.body.classList.add('light-theme');
-      document.body.classList.remove('bg-[#060b14]', 'text-[#f8fafc]');
-      document.body.classList.add('bg-[#f8fafc]', 'text-[#0f172a]');
+      document.body.classList.remove('dark-theme');
       localStorage.setItem('theme', 'light');
     } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
       document.body.classList.remove('light-theme');
-      document.body.classList.remove('bg-[#f8fafc]', 'text-[#0f172a]');
-      document.body.classList.add('bg-[#060b14]', 'text-[#f8fafc]');
+      document.body.classList.add('dark-theme');
       localStorage.setItem('theme', 'dark');
     }
   }, [theme]);
@@ -105,7 +110,11 @@ export function App() {
 
         <SelectedWork />
 
-        <OperationsCaseStudies />
+        <OperationsCaseStudies
+          onDiscussOperations={(savings) =>
+            scrollToContact('Operations & Reporting Audit', `Est. Annual Impact: ${savings}`)
+          }
+        />
 
         <Pricing
           onSelectPackage={(pkgName, price) => scrollToContact(pkgName, price)}
